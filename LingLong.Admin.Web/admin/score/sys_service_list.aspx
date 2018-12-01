@@ -15,6 +15,7 @@
     <script type="text/javascript" src="../../scripts/artdialog/dialog-plus-min.js"></script>
     <script type="text/javascript" charset="utf-8" src="../js/laymain.js"></script>
     <script type="text/javascript" charset="utf-8" src="../js/common.js"></script>
+    <script type="text/javascript" charset="utf-8" src="../../scripts/datepicker/WdatePicker.js"></script>
 </head>
 
 <body class="mainbody">
@@ -24,7 +25,7 @@
             <a href="javascript:history.back(-1);" class="back"><i></i><span>返回上一页</span></a>
             <a href="../center.aspx" class="home"><i></i><span>首页</span></a>
             <i class="arrow"></i>
-            <span>门店评价</span>
+            <span>服务评价</span>
         </div>
         <!--/导航栏-->
 
@@ -42,8 +43,26 @@
                         </ul>
                     </div>--%>
                     <div class="r-list">
-                        <asp:TextBox ID="txtKeywords" runat="server" CssClass="keyword" />
-                        <asp:LinkButton ID="lbtnSearch" runat="server" CssClass="btn-search" OnClick="btnSearch_Click">查询</asp:LinkButton>
+                        <table>
+                            <tr>
+                                <td><span>门店名称</span></td>
+                                <td>
+                                    <asp:TextBox ID="txtStoreName" runat="server" CssClass="keyword" /></td>
+                                <td><span>服务员姓名</span></td>
+                                <td>
+                                    <asp:TextBox ID="txtBusinessName" runat="server" CssClass="keyword" /></td>
+                                <td><span>评价用户</span></td>
+                                <td>
+                                    <asp:TextBox ID="txtCustomerName" runat="server" CssClass="keyword" /></td>
+                                <td><span>评价时间</span></td>
+                                <td>
+                                    <asp:TextBox ID="txtEvaluateTime" runat="server"  class="input rule-date-input" onfocus="WdatePicker({dateFmt:&#39;yyyy-MM-dd HH:mm:ss&#39;})" datatype="/^\s*$|^\d{4}\-\d{1,2}\-\d{1,2}\s{1}(\d{1,2}:){2}\d{1,2}$/" errormsg="请选择正确的日期" sucmsg=" " />
+                                </td>
+                                <td>
+                                    <asp:LinkButton ID="lbtnSearch" runat="server" CssClass="btn-search" OnClick="btnSearch_Click">查询</asp:LinkButton>
+                                </td>
+                            </tr>
+                        </table>
                     </div>
                 </div>
             </div>
@@ -57,22 +76,22 @@
                     <table width="100%" border="0" cellspacing="0" cellpadding="0" class="ltable">
                         <tr>
                             <%--<th width="5%">选择</th>--%>
-                            <th align="center" width="10%">ID</th>
-                            <th align="center" width="10%">门店ID</th>
-                            <th align="center" width="10%">服务员ID</th>
-                            <th align="center" width="10%">评价用户ID</th>
+                        <%--    <th align="center" width="10%">ID</th>--%>
+                            <th align="center" width="10%">门店名称</th>
+                            <th align="center" width="10%">服务员姓名</th>
+                            <th align="center" width="10%">评价用户</th>
+                            <th align="center" width="10%">评分</th> 
                             <th align="center" width="10%">评价时间</th>
-                            <th align="center" width="10%">评分</th>                          
                         </tr>
                 </HeaderTemplate>
                 <ItemTemplate>
                     <tr>
-                        <td align="center"><%# Eval("ID") %></td>
-                        <td align="center"><%# Eval("StoreId") %></td>                        
-                        <td align="center"><%# Eval("BusinessId") %></td>
-                        <td align="center"><%# Eval("CustomerId") %></td>
-                        <td align="center"><%# Eval("EvaluateTime") %></td>                        
+                        <%--<td align="center"><%# Eval("ID") %></td>--%>
+                        <td align="center"><%# Eval("StoreName") %></td>                        
+                        <td align="center"><%# Eval("BusinessName") %></td>
+                        <td align="center"><%# Eval("CustomerName") %></td>
                         <td align="center"><%# Eval("Score") %></td>
+                        <td align="center"><%# Eval("EvaluateTime") %></td>                        
                     </tr>
                 </ItemTemplate>
                 <FooterTemplate>

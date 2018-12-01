@@ -429,7 +429,9 @@ namespace LingLong.Admin.DAL
         public DataSet GetList(int pageSize, int pageIndex, string strWhere, string filedOrder, out int recordCount)
         {
             StringBuilder strSql = new StringBuilder();
-            strSql.Append("select * FROM " + "t_agent");
+            strSql.Append("select a.*,IFNULL( b.StoreNum, 0 ) AS StoreNum  FROM " + @"t_agent a
+
+            LEFT JOIN(SELECT COUNT(* ) AS StoreNum, AgentId FROM t_agent_store GROUP BY AgentId) b ON a.ID = b.AgentId ");
             if (strWhere.Trim() != "")
             {
                 strSql.Append(" where " + strWhere);

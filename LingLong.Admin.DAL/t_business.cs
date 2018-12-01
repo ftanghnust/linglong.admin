@@ -401,7 +401,11 @@ namespace LingLong.Admin.DAL
         public DataSet GetList(int pageSize, int pageIndex, string strWhere, string filedOrder, out int recordCount)
         {
             StringBuilder strSql = new StringBuilder();
-            strSql.Append("select b.*, c.StoreName, c.StoreImgUrl, a.RoleId, a.ID r_ID FROM "
+            strSql.Append(@"select b.*, c.StoreName, c.StoreImgUrl,  CASE a.RoleId
+            WHEN 0 THEN '超级管理员'
+            WHEN 1 THEN '管理员'
+            WHEN 2 THEN '门店经理'
+            WHEN 3 THEN '服务员'END AS RoleId,a.State, a.ID r_ID FROM "
                 + " t_store_business a LEFT JOIN t_business b ON a.BusinessId = b.ID LEFT JOIN t_store c ON a.StoreId = c.ID ");
             if (strWhere.Trim() != "")
             {

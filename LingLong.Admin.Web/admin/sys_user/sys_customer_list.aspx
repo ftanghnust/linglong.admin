@@ -43,8 +43,19 @@
                         </ul>
                     </div>
                     <div class="r-list">
-                        <asp:TextBox ID="txtKeywords" runat="server" CssClass="keyword" />
-                        <asp:LinkButton ID="lbtnSearch" runat="server" CssClass="btn-search" OnClick="btnSearch_Click">查询</asp:LinkButton>
+                        <table>
+                            <tr>
+                                <td><span>手机号</span></td>
+                                <td>
+                                    <asp:TextBox ID="txtTelPhone" runat="server" CssClass="keyword" /></td>
+                                <td><span>昵称</span></td>
+                                <td>
+                                    <asp:TextBox ID="txtNickname" runat="server" CssClass="keyword" /></td>
+                                <td>
+                                    <asp:LinkButton ID="lbtnSearch" runat="server" CssClass="btn-search" OnClick="btnSearch_Click">查询</asp:LinkButton>
+                                </td>
+                            </tr>
+                        </table>
                     </div>
                 </div>
             </div>
@@ -58,18 +69,18 @@
                     <table width="100%" border="0" cellspacing="0" cellpadding="0" class="ltable">
                         <tr>
                             <th align="center" width="5%">选择</th>
-                            <th align="center" width="5%">ID</th>
-                            <th align="center" width="5%">客户类型</th>
+                            <%--  <th align="center" width="5%">ID</th>
+                            <th align="center" width="5%">客户类型</th>--%>
                             <%--<th width="5%">是否管理员</th>--%>
-                            <th align="center" width="8%">真实姓名</th>
-                            <th align="center" width="5%">微信号</th>
+                            <%--  <th align="center" width="8%">真实姓名</th>
+                            <th align="center" width="5%">微信号</th>--%>
                             <th align="center" width="5%">昵称</th>
                             <th align="center" width="5%">性别</th>
                             <th align="center" width="8%">头像</th>
                             <th align="center" width="8%">手机号码</th>
-                            <th align="center" width="8%">籍贯</th>
-                            <th align="center" width="5%">身高</th>
-                            <th align="center" width="8%">生日</th>
+                            <th align="center" width="8%">开屏密码</th>
+                            <%--  <th align="center" width="5%">身高</th>
+                            <th align="center" width="8%">生日</th>--%>
                             <th align="center" width="8%">注册时间</th>
                             <%--<th width="8%">状态</th>--%>
                             <th align="center" width="5%"></th>
@@ -81,20 +92,20 @@
                             <asp:CheckBox ID="chkId" CssClass="checkall" runat="server" Style="vertical-align: middle;" />
                             <asp:HiddenField ID="hidId" Value='<%#Eval("id")%>' runat="server" />
                         </td>
-                        <td align="center"><%# Eval("ID") %></td>
-                        <td align="center"><%# Eval("CustomerType").ToString() == "0"?"自动":"手动添加" %></td>
+                        <%--  <td align="center"><%# Eval("ID") %></td>
+                        <td align="center"><%# Eval("CustomerType").ToString() == "0"?"自动":"手动添加" %></td>--%>
                         <%--<td align="center"><%# Eval("IsManage").ToString() == "0"?"否":"是" %></td>--%>
-                        <td align="center"><a href="sys_customer_edit.aspx?action=<%#DTEnums.ActionEnum.Edit %>&id=<%#Eval("ID")%>"><%# Eval("TrueName") %></a></td>
-                        <td align="center"><%# Eval("Wechat") %></td>
+                        <%--  <td align="center"><a href="sys_customer_edit.aspx?action=<%#DTEnums.ActionEnum.Edit %>&id=<%#Eval("ID")%>"><%# Eval("TrueName") %></a></td>
+                        <td align="center"><%# Eval("Wechat") %></td>--%>
                         <td align="center"><%# Eval("Nickname") %></td>
                         <td align="center"><%# Eval("Gender").ToString() == "1"?"男":"女" %></td>
                         <td align="center">
-                            <image src="<%# Eval("AvatarUrl") %>" style="width:100px;height:80px;"></image>
+                            <image src="<%# Eval("AvatarUrl") %>" style="width: 100px; height: 80px;"></image>
                         </td>
                         <td align="center"><%# Eval("PhoneNumber") %></td>
-                        <td align="center"><%# Eval("Country").ToString() +Eval("Province").ToString() + Eval("City").ToString()+Eval("NativePlace").ToString() %></td>
-                        <td align="center"><%# Eval("Height") %></td>
-                        <td align="center"><%# Eval("Birthday") %></td>
+                        <td align="center"><%# Eval("PassWord").ToString() %></td>
+                        <%-- <td align="center"><%# Eval("Height") %></td>
+                        <td align="center"><%# Eval("Birthday") %></td>--%>
                         <td align="center"><%# Eval("RegisterTime") %></td>
                         <%--<td align="center"><%# Eval("State").ToString() == "0" ? "待审核" : (Eval("State").ToString() == "1" ? "启用":"禁用") %></td>--%>
                         <td align="center"><a href="sys_customer_edit.aspx?action=<%#DTEnums.ActionEnum.Edit %>&id=<%#Eval("ID")%>">修改</a></td>

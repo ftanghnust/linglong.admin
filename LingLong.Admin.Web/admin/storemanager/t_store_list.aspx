@@ -16,6 +16,7 @@
     <script type="text/javascript" src="../../scripts/artdialog/dialog-plus-min.js"></script>
     <script type="text/javascript" charset="utf-8" src="../js/laymain.js"></script>
     <script type="text/javascript" charset="utf-8" src="../js/common.js"></script>
+    <script type="text/javascript" charset="utf-8" src="../../scripts/datepicker/WdatePicker.js"></script>
 </head>
 
 <body class="mainbody">
@@ -43,8 +44,32 @@
                         </ul>
                     </div>
                     <div class="r-list">
-                        <asp:TextBox ID="txtKeywords" runat="server" CssClass="keyword" />
-                        <asp:LinkButton ID="lbtnSearch" runat="server" CssClass="btn-search" OnClick="btnSearch_Click">查询</asp:LinkButton>
+                        <table>
+                            <tr>
+                                <td><span>门店名称</span></td>
+                                <td>
+                                    <asp:TextBox ID="txtStoreName" runat="server" CssClass="keyword" /></td>
+                                <td><span>代理商名称</span></td>
+                                <td>
+                                    <asp:TextBox ID="txtAgentName" runat="server" CssClass="keyword" /></td>
+                                <td><span>注册时间</span></td>
+                                <td>
+                                    <asp:TextBox ID="txtCreateTime" runat="server"  class="input rule-date-input" onfocus="WdatePicker({dateFmt:&#39;yyyy-MM-dd HH:mm:ss&#39;})" datatype="/^\s*$|^\d{4}\-\d{1,2}\-\d{1,2}\s{1}(\d{1,2}:){2}\d{1,2}$/" errormsg="请选择正确的日期" sucmsg=" " />
+                                     </td>
+                                <td><span>状态</span></td>
+                                <td>
+                                    <asp:DropDownList ID="ddl_State" runat="server" datatype="*" CssClass="select" sucmsg=" ">
+                                        <asp:ListItem Value="" Text="全部"></asp:ListItem>
+                                        <asp:ListItem Value="000" Text="待审核"></asp:ListItem>
+                                        <asp:ListItem Value="1" Text="启用"></asp:ListItem>
+                                        <asp:ListItem Value="2" Text="禁用"></asp:ListItem>
+                                    </asp:DropDownList>
+                                </td>
+                                <td>
+                                    <asp:LinkButton ID="lbtnSearch" runat="server" CssClass="btn-search" OnClick="btnSearch_Click">查询</asp:LinkButton>
+                                </td>
+                            </tr>
+                        </table>
                     </div>
                 </div>
             </div>
@@ -57,16 +82,17 @@
                 <HeaderTemplate>
                     <table width="100%" border="0" cellspacing="0" cellpadding="0" class="ltable">
                         <tr>
-                            <th align="center" width="8%">选择</th>
-                            <th align="center" width="4%">ID</th>
-                            <th align="center">门店名称</th>
-                            <th align="center" width="10%">申请人OpenId</th>
-                            <th align="center" width="10%">门店电话</th>
-                            <th align="center" width="10%">门店图片链接</th>
+                            <th align="center" width="4%">选择</th>
+                        <%--    <th align="center" width="4%">ID</th>--%>
+                            <th align="center" width="10%">门店名称</th>
+                            <th align="center" width="5%">申请人姓名</th>
+                            <th align="center" width="8%">门店电话</th>
+                         <%--   <th align="center" width="10%">门店图片链接</th>--%>
                             <th align="center" width="12%">详细地址</th>
                             <th align="center" width="4%">状态</th>
-                            <th align="center" width="4%">门店评分</th>
-                            <th align="center" width="8%">创建时间</th>
+                            <th align="center" width="4%">所属代理商</th>
+                        <%--    <th align="center" width="4%">门店评分</th>--%>
+                            <th align="center" width="8%">注册时间</th>
                             <th align="center" width="8%">操作</th>
                         </tr>
                 </HeaderTemplate>
@@ -76,14 +102,15 @@
                             <asp:CheckBox ID="chkId" CssClass="checkall" runat="server" Style="vertical-align: middle;" />
                             <asp:HiddenField ID="hidId" Value='<%#Eval("id")%>' runat="server" />
                         </td>
-                        <td align="center"><%# Eval("ID") %></td>
+                     <%--   <td align="center"><%# Eval("ID") %></td>--%>
                         <td align="center"><a href="t_store_edit.aspx?action=<%#DTEnums.ActionEnum.Edit %>&id=<%#Eval("id")%>"><%# Eval("StoreName") %></a></td>
-                        <td align="center"><%# Eval("ApplyOpenId") %></td>
+                        <td align="center"><%# Eval("BusinessName") %></td>
                         <td align="center"><%# Eval("PhoneNumber") %></td>
-                        <td align="center"><%# Eval("StoreImgUrl") %></td>
+                   <%--     <td align="center"><%# Eval("StoreImgUrl") %></td>--%>
                         <td align="center"><%# Eval("Province").ToString() + Eval("City").ToString() + Eval("Area").ToString() + Eval("Address").ToString() %></td>
                         <td align="center"><%# Eval("State").ToString() == "0" ? "待审核": (Eval("State").ToString() == "1"?"启用":"禁用") %></td>
-                        <td align="center"><%# Eval("Score") %></td>
+                        <td align="center"><%# Eval("AgentName") %></td>
+                 <%--       <td align="center"><%# Eval("Score") %></td>--%>
                         <td align="center"><%# Eval("CreationTime") %></td>
                         <%--<td><%#new LingLong.Admin.BLL.manager_role().GetTitle(Convert.ToInt32(Eval("role_id")))%></td>
                         <td><%# Eval("telephone") %></td>

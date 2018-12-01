@@ -31,13 +31,40 @@ namespace LingLong.Admin.Web.admin.sys_user {
         protected global::System.Web.UI.WebControls.LinkButton btnDelete;
         
         /// <summary>
-        /// txtKeywords 控件。
+        /// txtTelPhone 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtKeywords;
+        protected global::System.Web.UI.WebControls.TextBox txtTelPhone;
+        
+        /// <summary>
+        /// txtStoreName 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtStoreName;
+        
+        /// <summary>
+        /// ddl_Role 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddl_Role;
+        
+        /// <summary>
+        /// ddl_State 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddl_State;
         
         /// <summary>
         /// lbtnSearch 控件。

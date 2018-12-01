@@ -31,13 +31,40 @@ namespace LingLong.Admin.Web.admin.storemanager {
         protected global::System.Web.UI.WebControls.LinkButton btnDelete;
         
         /// <summary>
-        /// txtKeywords 控件。
+        /// txtStoreName 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtKeywords;
+        protected global::System.Web.UI.WebControls.TextBox txtStoreName;
+        
+        /// <summary>
+        /// txtAgentName 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtAgentName;
+        
+        /// <summary>
+        /// txtCreateTime 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtCreateTime;
+        
+        /// <summary>
+        /// ddl_State 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddl_State;
         
         /// <summary>
         /// lbtnSearch 控件。

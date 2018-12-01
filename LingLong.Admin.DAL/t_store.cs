@@ -349,7 +349,22 @@ namespace LingLong.Admin.DAL
         public DataSet GetList(int pageSize, int pageIndex, string strWhere, string filedOrder, out int recordCount)
         {
             StringBuilder strSql = new StringBuilder();
-            strSql.Append("select * FROM " + "t_store");
+            strSql.Append(@"select 	a.*,
+            b.ID AS BusinessId,
+                CASE
+            b.TrueName
+                WHEN NULL THEN
+            b.Nickname ELSE b.TrueName
+                END AS BusinessName,
+                c.AgentId,
+            CASE
+            d.TrueName
+                WHEN NULL THEN
+            d.Nickname ELSE d.TrueName
+                END AS AgentName  FROM " + @"t_store a
+            LEFT JOIN t_business b ON a.ApplyOpenId = b.OpenId
+            LEFT JOIN t_agent_store c ON a.ID = c.StoreId
+            LEFT JOIN t_agent d ON c.AgentId = d.ID ");
             if (strWhere.Trim() != "")
             {
                 strSql.Append(" where " + strWhere);

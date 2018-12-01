@@ -310,7 +310,21 @@ namespace LingLong.Admin.DAL
         public DataSet GetList(int pageSize, int pageIndex, string strWhere, string filedOrder, out int recordCount)
         {
             StringBuilder strSql = new StringBuilder();
-            strSql.Append("select * FROM t_service_evaluation ");
+            strSql.Append(@"select 	a.*,
+            b.StoreName,
+            CASE
+            c.Nickname
+                WHEN NULL THEN
+            c.TrueName ELSE c.Nickname
+                END AS CustomerName,
+                CASE
+            d.TrueName
+                WHEN NULL THEN
+            d.Nickname ELSE d.TrueName
+                END AS BusinessName  FROM t_service_evaluation a
+	LEFT JOIN t_store b ON a.StoreId = b.ID
+	LEFT JOIN t_customer c ON a.CustomerId = c.ID
+	LEFT JOIN t_business d ON a.BusinessId = d.ID ");
             if (strWhere.Trim() != "")
             {
                 strSql.Append(" where " + strWhere);

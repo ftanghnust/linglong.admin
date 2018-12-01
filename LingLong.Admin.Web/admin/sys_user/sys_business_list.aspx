@@ -18,6 +18,7 @@
     <script type="text/javascript" charset="utf-8" src="../js/common.js"></script>
 </head>
 
+
 <body class="mainbody">
     <form id="form1" runat="server">
         <!--导航栏-->
@@ -40,11 +41,41 @@
                             <li><a class="all" href="javascript:;" onclick="checkAll(this);"><i></i><span>全选</span></a></li>
                             <li>
                                 <asp:LinkButton ID="btnDelete" runat="server" CssClass="del" OnClientClick="return ExePostBack('btnDelete');" OnClick="btnDelete_Click"><i></i><span>删除</span></asp:LinkButton></li>
+
                         </ul>
                     </div>
                     <div class="r-list">
-                        <asp:TextBox ID="txtKeywords" runat="server" CssClass="keyword" />
-                        <asp:LinkButton ID="lbtnSearch" runat="server" CssClass="btn-search" OnClick="btnSearch_Click">查询</asp:LinkButton>
+                        <table>
+                            <tr>
+                                <td><span>手机号</span></td>
+                                <td>
+                                    <asp:TextBox ID="txtTelPhone" runat="server" CssClass="keyword" /></td>
+                                <td><span>门店</span></td>
+                                <td>
+                                    <asp:TextBox ID="txtStoreName" runat="server" CssClass="keyword" /></td>
+                                <td><span>角色</span></td>
+                                <td>
+                                    <asp:DropDownList ID="ddl_Role" runat="server" datatype="*" CssClass="select" sucmsg=" ">
+                                        <asp:ListItem Value="" Text="全部"></asp:ListItem>
+                                        <asp:ListItem Value="0" Text="超级管理员"></asp:ListItem>
+                                        <asp:ListItem Value="1" Text="管理员"></asp:ListItem>
+                                        <asp:ListItem Value="2" Text="门店经理"></asp:ListItem>
+                                        <asp:ListItem Value="3" Text="服务员"></asp:ListItem>
+                                    </asp:DropDownList>
+                                </td>
+                                <td><span>状态</span></td>
+                                <td>
+                                    <asp:DropDownList ID="ddl_State" runat="server" datatype="*" CssClass="select" sucmsg=" ">
+                                        <asp:ListItem Value="" Text="全部"></asp:ListItem>
+                                        <asp:ListItem Value="0" Text="启用"></asp:ListItem>
+                                        <asp:ListItem Value="1" Text="禁用"></asp:ListItem>
+                                    </asp:DropDownList>
+                                </td>
+                                <td>
+                                    <asp:LinkButton ID="lbtnSearch" runat="server" CssClass="btn-search" OnClick="btnSearch_Click">查询</asp:LinkButton>
+                                </td>
+                            </tr>
+                        </table>
                     </div>
                 </div>
             </div>
@@ -60,10 +91,10 @@
                             <th width="5%" align="center">选择</th>
                             <%--<th width="5%" align="center">ID</th>--%>
                             <%--<th width="5%">是否管理员</th>--%>
-                            <th width="8%" align="center">真实姓名</th>
+                            <th width="5%" align="center">真实姓名</th>
                             <th width="5%" align="center">门店名</th>
                             <th width="5%" align="center">昵称</th>
-                            <th width="5%" align="center">角色ID</th>
+                            <th width="5%" align="center">角色</th>
                             <th width="5%" align="center">性别</th>
                             <th width="8%" align="center">头像</th>
                             <th width="8%" align="center">手机号码</th>
@@ -71,7 +102,7 @@
                             <%--<th width="5%">身高</th>
                             <th width="8%">生日</th>--%>
                             <th width="8%" align="center">注册时间</th>
-                            <%--<th width="8%">状态</th>--%>
+                            <th width="8%">状态</th>
                             <th width="5%"></th>
                         </tr>
                 </HeaderTemplate>
@@ -86,18 +117,18 @@
                         <td align="center"><a href="sys_business_edit.aspx?action=<%#DTEnums.ActionEnum.Edit %>&id=<%#Eval("ID")%>"><%# Eval("TrueName") %></a></td>
                         <%--<td align="center"><%# Eval("Wechat") %></td>--%>
                         <td align="center"><%# Eval("StoreName") %></td>
-                        <td align="center"><%# Eval("Nickname") %></td>                        
+                        <td align="center"><%# Eval("Nickname") %></td>
                         <td align="center"><%# Eval("RoleId") %></td>
                         <td align="center"><%# Eval("Gender").ToString() == "1"?"男":"女" %></td>
                         <td align="center">
-                            <image src="<%# Eval("AvatarUrl") %>" style="width:120px;height:80px;"></image>
+                            <image src="<%# Eval("AvatarUrl") %>" style="width: 120px; height: 80px;"></image>
                         </td>
                         <td align="center"><%# Eval("PhoneNumber") %></td>
                         <td align="center"><%# Eval("Country").ToString() +Eval("Province").ToString() + Eval("City").ToString()+Eval("NativePlace").ToString() %></td>
                         <%--<td align="center"><%# Eval("Height") %></td>
                         <td align="center"><%# Eval("Birthday") %></td>--%>
                         <td align="center"><%# Eval("RegisterTime") %></td>
-                        <%--<td align="center"><%# Eval("State").ToString() == "0" ? "待审核" : (Eval("State").ToString() == "1" ? "启用":"禁用") %></td>--%>
+                        <td align="center"><%# Eval("State").ToString() == "0" ? "启用" : "禁用" %></td>
                         <td align="center">
                             <a href="sys_business_edit.aspx?action=<%#DTEnums.ActionEnum.Edit %>&id=<%#Eval("ID")%>">修改</a>
                             <a href="sys_business_edit.aspx?action=<%#DTEnums.ActionEnum.Delete %>&id=<%#Eval("r_ID")%>">删除</a>
