@@ -9,3 +9,8 @@
 /LingLong.Admin.Common/obj/Debug
 /LingLong.Admin.BLL/obj/Debug
 /.vs/config
+/LingLong.Admin.BLL/bin/Debug
+/LingLong.Admin.Common/bin/Debug
+/LingLong.Admin.DAL/bin/Debug
+/LingLong.Admin.Model/bin/Debug
+/LingLong.Admin.Web/bin
