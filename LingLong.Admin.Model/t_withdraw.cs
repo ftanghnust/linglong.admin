@@ -28,11 +28,13 @@ namespace LingLong.Admin.Model
 		#region Model
 		private int _id;
 		private int? _storeid;
-		private string _openid;
+	    private string _billno;
+        private string _openid;
 		private string _withdrawname;
 		private decimal? _withdraw;
 		private DateTime? _withdrawtime;
-		private int? _isdeleted;
+	    private int? _state;
+        private int? _isdeleted;
 		private long? _deleteruserid;
 		private DateTime? _lastmodificationtime;
 		private long? _lastmodifieruserid;
@@ -54,10 +56,15 @@ namespace LingLong.Admin.Model
 			set{ _storeid=value;}
 			get{return _storeid;}
 		}
-		/// <summary>
-		/// 
-		/// </summary>
-		public string OpenId
+	    public string BillNo
+        {
+	        set { _billno = value; }
+	        get { return _billno; }
+	    }
+        /// <summary>
+        /// 
+        /// </summary>
+        public string OpenId
 		{
 			set{ _openid=value;}
 			get{return _openid;}
@@ -86,10 +93,18 @@ namespace LingLong.Admin.Model
 			set{ _withdrawtime=value;}
 			get{return _withdrawtime;}
 		}
-		/// <summary>
-		/// 
-		/// </summary>
-		public int? IsDeleted
+	    /// <summary>
+	    /// 
+	    /// </summary>
+	    public int? State
+        {
+	        set { _state = value; }
+	        get { return _state; }
+	    }
+        /// <summary>
+        /// 
+        /// </summary>
+        public int? IsDeleted
 		{
 			set{ _isdeleted=value;}
 			get{return _isdeleted;}

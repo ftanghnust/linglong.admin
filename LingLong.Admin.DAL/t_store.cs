@@ -361,10 +361,12 @@ namespace LingLong.Admin.DAL
             d.TrueName
                 WHEN NULL THEN
             d.Nickname ELSE d.TrueName
-                END AS AgentName  FROM " + @"t_store a
+                END AS AgentName,
+ e.DistributionName  FROM " + @"t_store a
             LEFT JOIN t_business b ON a.ApplyOpenId = b.OpenId
             LEFT JOIN t_agent_store c ON a.ID = c.StoreId
-            LEFT JOIN t_agent d ON c.AgentId = d.ID ");
+            LEFT JOIN t_agent d ON c.AgentId = d.ID 
+	        left join t_reward_distribution e on a.PlanId = e.ID ");
             if (strWhere.Trim() != "")
             {
                 strSql.Append(" where " + strWhere);

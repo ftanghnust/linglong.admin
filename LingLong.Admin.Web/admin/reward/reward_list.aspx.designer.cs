@@ -31,6 +31,33 @@ namespace LingLong.Admin.Web.admin.reward {
         protected global::System.Web.UI.WebControls.TextBox txtKeywords;
         
         /// <summary>
+        /// txtWithdrawName 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtWithdrawName;
+        
+        /// <summary>
+        /// txtWithdrawTime 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtWithdrawTime;
+        
+        /// <summary>
+        /// ddl_State 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddl_State;
+        
+        /// <summary>
         /// lbtnSearch 控件。
         /// </summary>
         /// <remarks>

@@ -16,6 +16,7 @@
     <script type="text/javascript" src="../../scripts/artdialog/dialog-plus-min.js"></script>
     <script type="text/javascript" charset="utf-8" src="../js/laymain.js"></script>
     <script type="text/javascript" charset="utf-8" src="../js/common.js"></script>
+    <script type="text/javascript" charset="utf-8" src="../../scripts/datepicker/WdatePicker.js"></script>
 </head>
 
 <body class="mainbody">
@@ -43,8 +44,26 @@
                         </ul>
                     </div>--%>
                     <div class="r-list">
-                        <asp:TextBox ID="txtKeywords" runat="server" CssClass="keyword" />
-                        <asp:LinkButton ID="lbtnSearch" runat="server" CssClass="btn-search" OnClick="btnSearch_Click">查询</asp:LinkButton>
+                        <table>
+                            <tr>
+                                <td><span>门店名称</span></td>
+                                <td>
+                                    <asp:TextBox ID="txtStoreName" runat="server" CssClass="keyword" /></td>
+                                <td><span>被打赏人</span></td>
+                                <td>
+                                    <asp:TextBox ID="txtBusinessName" runat="server" CssClass="keyword" /></td>
+                                <td><span>打赏人</span></td>
+                                <td>
+                                    <asp:TextBox ID="txtCustomerName" runat="server" CssClass="keyword" /></td>
+                                <td><span>打赏时间</span></td>
+                                <td>
+                                    <asp:TextBox ID="txtRewardTime" runat="server"  class="input rule-date-input" onfocus="WdatePicker({dateFmt:&#39;yyyy-MM-dd HH:mm:ss&#39;})" datatype="/^\s*$|^\d{4}\-\d{1,2}\-\d{1,2}\s{1}(\d{1,2}:){2}\d{1,2}$/" errormsg="请选择正确的日期" sucmsg=" " />
+                                </td>
+                                <td>
+                                    <asp:LinkButton ID="lbtnSearch" runat="server" CssClass="btn-search" OnClick="btnSearch_Click">查询</asp:LinkButton>
+                                </td>
+                            </tr>
+                        </table>
                     </div>
                 </div>
             </div>
@@ -58,24 +77,32 @@
                     <table width="100%" border="0" cellspacing="0" cellpadding="0" class="ltable">
                         <tr>
                             <%--<th width="5%">选择</th>--%>
-                            <th align="center" width="10%">ID</th>
-                            <th align="center" width="10%">打赏Id</th>
-                            <th align="center" width="10%">受益人OpenId</th>
-                            <th align="center" width="10%">分配比例</th>
-                            <th align="center" width="10%">用户类型</th>
+                       <%--     <th align="center" width="10%">ID</th>--%>
+                            <th align="center" width="10%">打赏订单号</th>
+                            <th align="center" width="10%">打赏人</th>
+                            <th align="center" width="10%">打赏时间</th>
                             <th align="center" width="10%">打赏金额</th>
-                            <th align="center" width="5%">受益金额</th>
+                            <th align="center" width="10%">被打赏人</th>
+                         <%--   <th align="center" width="5%">所属门店Id</th>--%>
+                            <th align="center" width="5%">门店名称</th>
+                            <th align="center" width="5%">门店所属代理商</th>
                         </tr>
                 </HeaderTemplate>
                 <ItemTemplate>
                     <tr>
-                        <td align="center"><%# Eval("ID") %></td>
-                        <td align="center"><%# Eval("RewardId") %></td>
-                        <td align="center"><%# Eval("OpenrId") %></td>
-                        <td align="center"><%#Convert.ToDecimal( Eval("DistributionRatio").ToString())* 100 %>%</td>
+                    <%--    <td align="center"><%# Eval("ID") %></td>--%>
+                        <td align="center"><%# Eval("PaymentNo") %></td>
+                        <td align="center"><%# Eval("CustomerName") %></td>
+                        <td align="center"><%# Eval("RewardTime") %></td>
+                        <td align="center"><%# Eval("Money") %></td>
+                        <td align="center"><%# Eval("BusinessName") %></td>
+                <%--        <td align="center"><%# Eval("StoreId") %></td>--%>
+                        <td align="center"><%# Eval("StoreName") %></td>
+                        <td align="center"><%# Eval("AgentName") %></td>
+                       <%-- <td align="center"><%#Convert.ToDecimal( Eval("DistributionRatio").ToString())* 100 %>%</td>
                         <td align="center"><%# Eval("UserType").ToString() == "0"?"平台":(Eval("UserType").ToString() == "1"?"代理商":(Eval("UserType").ToString() == "2"?"门店":"服务员")) %></td>
                         <td align="center"><%# Eval("RewardMoney") %></td>
-                        <td align="center"><%# Eval("BenefitMoney") %></td>
+                        <td align="center"><%# Eval("BenefitMoney") %></td>--%>
                     </tr>
                 </ItemTemplate>
                 <FooterTemplate>

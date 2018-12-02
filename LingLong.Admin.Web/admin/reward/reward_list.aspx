@@ -15,6 +15,7 @@
     <script type="text/javascript" src="../../scripts/artdialog/dialog-plus-min.js"></script>
     <script type="text/javascript" charset="utf-8" src="../js/laymain.js"></script>
     <script type="text/javascript" charset="utf-8" src="../js/common.js"></script>
+    <script type="text/javascript" charset="utf-8" src="../../scripts/datepicker/WdatePicker.js"></script>
 </head>
 
 <body class="mainbody">
@@ -24,7 +25,7 @@
             <a href="javascript:history.back(-1);" class="back"><i></i><span>返回上一页</span></a>
             <a href="../center.aspx" class="home"><i></i><span>首页</span></a>
             <i class="arrow"></i>
-            <span>支付数据</span>
+            <span>提现数据</span>
         </div>
         <!--/导航栏-->
 
@@ -43,7 +44,28 @@
                     </div>
                     <div class="r-list">
                         <asp:TextBox ID="txtKeywords" runat="server" CssClass="keyword" />
-                        <asp:LinkButton ID="lbtnSearch" runat="server" CssClass="btn-search" OnClick="btnSearch_Click">查询</asp:LinkButton>
+                        <table>
+                            <tr>
+                                <td><span>提现人</span></td>
+                                <td>
+                                    <asp:TextBox ID="txtWithdrawName" runat="server" CssClass="keyword" /></td>
+                                <td><span>提现时间</span></td>
+                                <td>
+                                    <asp:TextBox ID="txtWithdrawTime" runat="server"  class="input rule-date-input" onfocus="WdatePicker({dateFmt:&#39;yyyy-MM-dd HH:mm:ss&#39;})" datatype="/^\s*$|^\d{4}\-\d{1,2}\-\d{1,2}\s{1}(\d{1,2}:){2}\d{1,2}$/" errormsg="请选择正确的日期" sucmsg=" " />
+                                </td>
+                                <td><span>提现状态</span></td>
+                                <td>
+                                    <asp:DropDownList ID="ddl_State" runat="server" datatype="*" CssClass="select" sucmsg=" ">
+                                        <asp:ListItem Value="" Text="全部"></asp:ListItem>
+                                        <asp:ListItem Value="0" Text="失败"></asp:ListItem>
+                                        <asp:ListItem Value="1" Text="正常"></asp:ListItem>
+                                    </asp:DropDownList>
+                                </td>
+                                <td>
+                                    <asp:LinkButton ID="lbtnSearch" runat="server" CssClass="btn-search" OnClick="btnSearch_Click">查询</asp:LinkButton>
+                                </td>
+                            </tr>
+                        </table>
                     </div>
                 </div>
             </div>
@@ -56,29 +78,20 @@
                 <HeaderTemplate>
                     <table width="100%" border="0" cellspacing="0" cellpadding="0" class="ltable">
                         <tr>
-                            <th align="center" width="8%">门店Id</th>
-                            <th align="center" width="12%">支付订单号</th>
-                            <th align="center" width="8%">打赏人Id</th>
-                            <th align="center" width="8%">被打赏人Id</th>
-                            <th align="center" width="8%">打赏商品Id</th>
-                            <th align="center" width="4%">打赏时间</th>
-                            <th align="center" width="5%">打赏金额</th>
-                            <th align="center" width="8%">删除标志</th>
-                            <th align="center" width="5%">删除用户Id</th>                            
+                            <th align="center" width="4%">提现人Id</th>
+                            <th align="center" width="4%">提现订单号</th>
+                            <th align="center" width="8%">提现金额</th>
+                            <th align="center" width="4%">提现时间</th>
+                            <th align="center" width="5%">提现状态</th>
                         </tr>
                 </HeaderTemplate>
                 <ItemTemplate>
                     <tr>
-                        
-                        <td align="center"><%#Eval("StoreId") %></td>
-                        <td align="center"><%#Eval("PaymentNo")%></td>
-                        <td align="center"><%#Eval("CustomerId")%></td>
-                        <td align="center"><%#Eval("BusinessId")%></td>
-                        <td align="center"><%#Eval("GoodsId")%></td>
-                        <td align="center"><%#Eval("RewardTime")%></td>
-                        <td align="center"><%#Eval("Money")%></td>
-                        <td align="center"><%#Eval("IsDeleted").ToString().Trim() == "0" ? "正常" : "删除"%></td>
-                        <td align="center"><%#Eval("DeleterUserId")%></td>                        
+                        <td align="center"><%#Eval("BillNo") %></td>
+                        <td align="center"><%#Eval("BillNo")%></td>
+                        <td align="center"><%#Eval("Withdraw")%></td>
+                        <td align="center"><%#Eval("WithdrawTime")%></td>
+                        <td align="center"><%#(Eval("State").ToString().Trim() == "0" || Eval("State").ToString().Trim() == "") ? "失败" : "正常"%></td>         
                     </tr>
                 </ItemTemplate>
                 <FooterTemplate>

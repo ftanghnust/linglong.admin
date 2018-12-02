@@ -1,0 +1,1 @@
+INSERT INTO `linglong`.`dt_navigation`(`id`, `parent_id`, `channel_id`, `nav_type`, `name`, `title`, `sub_title`, `icon_url`, `link_url`, `sort_id`, `is_lock`, `remark`, `action_type`, `is_sys`) VALUES (83, 80, 0, 'System', 'sys_comment', '门店评价', '门店评价', '', 'score/sys_comment_list.aspx', 99, 0, '', 'Show,View,Add,Edit,Delete', 0);

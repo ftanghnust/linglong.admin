@@ -17,6 +17,7 @@
 using System;
 using System.Data;
 using System.Text;
+using LingLong.Admin.Common;
 using MySql.Data.MySqlClient;
 //using LingLong.Admin.IDAL;
 //using Maticsoft.DBUtility;//Please add references
@@ -321,10 +322,49 @@ namespace LingLong.Admin.DAL
 			return DbHelperMySql.Query(strSql.ToString());
 		}
 
-		/// <summary>
-		/// 获取记录总数
-		/// </summary>
-		public int GetRecordCount(string strWhere)
+	    /// <summary>
+	    /// 获得查询分页数据
+	    /// </summary>
+	    public DataSet GetList(int pageSize, int pageIndex, string strWhere, string filedOrder, out int recordCount)
+	    {
+	        StringBuilder strSql = new StringBuilder();
+	        strSql.Append(@"SELECT
+	a.*,
+CASE
+		b.Nickname 
+	WHEN NULL THEN
+		b.TrueName ELSE b.Nickname 
+	END AS CustomerName,
+CASE
+		c.TrueName 
+	WHEN NULL THEN
+		c.Nickname ELSE c.TrueName 
+	END AS BusinessName,
+	d.StoreName,
+CASE
+		f.TrueName 
+	WHEN NULL THEN
+		f.Nickname ELSE f.TrueName 
+	END AS AgentName 
+FROM
+	t_reward a
+	LEFT JOIN t_customer b ON a.CustomerId = b.ID
+	LEFT JOIN t_business c ON a.BusinessId = c.ID
+	LEFT JOIN t_store d ON a.StoreId = d.ID
+	LEFT JOIN t_agent_store e ON d.ID = e.StoreId
+	LEFT JOIN t_agent f ON e.AgentId = f.ID ");
+	        if (strWhere.Trim() != "")
+	        {
+	            strSql.Append(" where " + strWhere);
+	        }
+	        recordCount = Convert.ToInt32(DbHelperMySql.GetSingle(PagingHelper.CreateCountingSql(strSql.ToString())));
+	        return DbHelperMySql.Query(PagingHelper.CreatePagingSql(recordCount, pageSize, pageIndex, strSql.ToString(), filedOrder));
+	    }
+
+        /// <summary>
+        /// 获取记录总数
+        /// </summary>
+        public int GetRecordCount(string strWhere)
 		{
 			StringBuilder strSql=new StringBuilder();
 			strSql.Append("select count(1) FROM t_reward ");

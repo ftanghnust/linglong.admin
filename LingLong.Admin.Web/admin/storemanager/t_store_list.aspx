@@ -91,6 +91,7 @@
                             <th align="center" width="12%">详细地址</th>
                             <th align="center" width="4%">状态</th>
                             <th align="center" width="4%">所属代理商</th>
+                            <th align="center" width="4%">打赏方案</th>
                         <%--    <th align="center" width="4%">门店评分</th>--%>
                             <th align="center" width="8%">注册时间</th>
                             <th align="center" width="8%">操作</th>
@@ -111,6 +112,7 @@
                         <td align="center"><%# Eval("State").ToString() == "0" ? "待审核": (Eval("State").ToString() == "1"?"启用":"禁用") %></td>
                         <td align="center"><%# Eval("AgentName") %></td>
                  <%--       <td align="center"><%# Eval("Score") %></td>--%>
+                        <td align="center"><%# Eval("DistributionName") %></td>
                         <td align="center"><%# Eval("CreationTime") %></td>
                         <%--<td><%#new LingLong.Admin.BLL.manager_role().GetTitle(Convert.ToInt32(Eval("role_id")))%></td>
                         <td><%# Eval("telephone") %></td>

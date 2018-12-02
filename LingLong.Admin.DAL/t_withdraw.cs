@@ -17,6 +17,7 @@
 using System;
 using System.Data;
 using System.Text;
+using LingLong.Admin.Common;
 using MySql.Data.MySqlClient;
 //using LingLong.Admin.IDAL;
 //using Maticsoft.DBUtility;//Please add references
@@ -64,32 +65,36 @@ namespace LingLong.Admin.DAL
 		{
 			StringBuilder strSql=new StringBuilder();
 			strSql.Append("insert into t_withdraw(");
-			strSql.Append("StoreId,OpenId,WithdrawName,Withdraw,WithdrawTime,IsDeleted,DeleterUserId,LastModificationTime,LastModifierUserId,CreationTime,CreatorUserId)");
+			strSql.Append("StoreId,BillNo,OpenId,WithdrawName,Withdraw,WithdrawTime,State,IsDeleted,DeleterUserId,LastModificationTime,LastModifierUserId,CreationTime,CreatorUserId)");
 			strSql.Append(" values (");
-			strSql.Append("@StoreId,@OpenId,@WithdrawName,@Withdraw,@WithdrawTime,@IsDeleted,@DeleterUserId,@LastModificationTime,@LastModifierUserId,@CreationTime,@CreatorUserId)");
+			strSql.Append("@StoreId,@BillNo,@OpenId,@WithdrawName,@Withdraw,@WithdrawTime,@State,@IsDeleted,@DeleterUserId,@LastModificationTime,@LastModifierUserId,@CreationTime,@CreatorUserId)");
 			MySqlParameter[] parameters = {
 					new MySqlParameter("@StoreId", MySqlDbType.Int32,11),
-					new MySqlParameter("@OpenId", MySqlDbType.LongText),
+			        new MySqlParameter("@BillNo", MySqlDbType.LongText),
+                    new MySqlParameter("@OpenId", MySqlDbType.LongText),
 					new MySqlParameter("@WithdrawName", MySqlDbType.VarChar,100),
 					new MySqlParameter("@Withdraw", MySqlDbType.Decimal,10),
 					new MySqlParameter("@WithdrawTime", MySqlDbType.DateTime),
-					new MySqlParameter("@IsDeleted", MySqlDbType.Int16,4),
+			        new MySqlParameter("@State", MySqlDbType.Int16,4),
+                    new MySqlParameter("@IsDeleted", MySqlDbType.Int16,4),
 					new MySqlParameter("@DeleterUserId", MySqlDbType.Int64,20),
 					new MySqlParameter("@LastModificationTime", MySqlDbType.DateTime),
 					new MySqlParameter("@LastModifierUserId", MySqlDbType.Int64,20),
 					new MySqlParameter("@CreationTime", MySqlDbType.DateTime),
 					new MySqlParameter("@CreatorUserId", MySqlDbType.Int64,20)};
 			parameters[0].Value = model.StoreId;
-			parameters[1].Value = model.OpenId;
-			parameters[2].Value = model.WithdrawName;
-			parameters[3].Value = model.Withdraw;
-			parameters[4].Value = model.WithdrawTime;
-			parameters[5].Value = model.IsDeleted;
-			parameters[6].Value = model.DeleterUserId;
-			parameters[7].Value = model.LastModificationTime;
-			parameters[8].Value = model.LastModifierUserId;
-			parameters[9].Value = model.CreationTime;
-			parameters[10].Value = model.CreatorUserId;
+		    parameters[1].Value = model.BillNo;
+            parameters[2].Value = model.OpenId;
+			parameters[3].Value = model.WithdrawName;
+			parameters[4].Value = model.Withdraw;
+			parameters[5].Value = model.WithdrawTime;
+		    parameters[6].Value = model.State;
+            parameters[7].Value = model.IsDeleted;
+			parameters[8].Value = model.DeleterUserId;
+			parameters[9].Value = model.LastModificationTime;
+			parameters[10].Value = model.LastModifierUserId;
+			parameters[11].Value = model.CreationTime;
+			parameters[12].Value = model.CreatorUserId;
 
 			int rows=DbHelperMySql.ExecuteSql(strSql.ToString(),parameters);
 			if (rows > 0)
@@ -109,11 +114,13 @@ namespace LingLong.Admin.DAL
 			StringBuilder strSql=new StringBuilder();
 			strSql.Append("update t_withdraw set ");
 			strSql.Append("StoreId=@StoreId,");
-			strSql.Append("OpenId=@OpenId,");
+		    strSql.Append("BillNo=@BillNo,");
+            strSql.Append("OpenId=@OpenId,");
 			strSql.Append("WithdrawName=@WithdrawName,");
 			strSql.Append("Withdraw=@Withdraw,");
 			strSql.Append("WithdrawTime=@WithdrawTime,");
-			strSql.Append("IsDeleted=@IsDeleted,");
+		    strSql.Append("State=@State,");
+            strSql.Append("IsDeleted=@IsDeleted,");
 			strSql.Append("DeleterUserId=@DeleterUserId,");
 			strSql.Append("LastModificationTime=@LastModificationTime,");
 			strSql.Append("LastModifierUserId=@LastModifierUserId,");
@@ -122,11 +129,13 @@ namespace LingLong.Admin.DAL
 			strSql.Append(" where ID=@ID");
 			MySqlParameter[] parameters = {
 					new MySqlParameter("@StoreId", MySqlDbType.Int32,11),
-					new MySqlParameter("@OpenId", MySqlDbType.LongText),
+			        new MySqlParameter("@BillNo", MySqlDbType.LongText),
+                    new MySqlParameter("@OpenId", MySqlDbType.LongText),
 					new MySqlParameter("@WithdrawName", MySqlDbType.VarChar,100),
 					new MySqlParameter("@Withdraw", MySqlDbType.Decimal,10),
 					new MySqlParameter("@WithdrawTime", MySqlDbType.DateTime),
-					new MySqlParameter("@IsDeleted", MySqlDbType.Int16,4),
+			        new MySqlParameter("@State", MySqlDbType.Int16,4),
+                    new MySqlParameter("@IsDeleted", MySqlDbType.Int16,4),
 					new MySqlParameter("@DeleterUserId", MySqlDbType.Int64,20),
 					new MySqlParameter("@LastModificationTime", MySqlDbType.DateTime),
 					new MySqlParameter("@LastModifierUserId", MySqlDbType.Int64,20),
@@ -134,17 +143,19 @@ namespace LingLong.Admin.DAL
 					new MySqlParameter("@CreatorUserId", MySqlDbType.Int64,20),
 					new MySqlParameter("@ID", MySqlDbType.Int32,11)};
 			parameters[0].Value = model.StoreId;
-			parameters[1].Value = model.OpenId;
-			parameters[2].Value = model.WithdrawName;
-			parameters[3].Value = model.Withdraw;
-			parameters[4].Value = model.WithdrawTime;
-			parameters[5].Value = model.IsDeleted;
-			parameters[6].Value = model.DeleterUserId;
-			parameters[7].Value = model.LastModificationTime;
-			parameters[8].Value = model.LastModifierUserId;
-			parameters[9].Value = model.CreationTime;
-			parameters[10].Value = model.CreatorUserId;
-			parameters[11].Value = model.ID;
+		    parameters[1].Value = model.BillNo;
+            parameters[2].Value = model.OpenId;
+			parameters[3].Value = model.WithdrawName;
+			parameters[4].Value = model.Withdraw;
+			parameters[5].Value = model.WithdrawTime;
+		    parameters[6].Value = model.State;
+            parameters[7].Value = model.IsDeleted;
+			parameters[8].Value = model.DeleterUserId;
+			parameters[9].Value = model.LastModificationTime;
+			parameters[10].Value = model.LastModifierUserId;
+			parameters[11].Value = model.CreationTime;
+			parameters[12].Value = model.CreatorUserId;
+			parameters[13].Value = model.ID;
 
 			int rows=DbHelperMySql.ExecuteSql(strSql.ToString(),parameters);
 			if (rows > 0)
@@ -208,7 +219,7 @@ namespace LingLong.Admin.DAL
 		{
 			
 			StringBuilder strSql=new StringBuilder();
-			strSql.Append("select ID,StoreId,OpenId,WithdrawName,Withdraw,WithdrawTime,IsDeleted,DeleterUserId,LastModificationTime,LastModifierUserId,CreationTime,CreatorUserId from t_withdraw ");
+			strSql.Append("select ID,StoreId,BillNo,OpenId,WithdrawName,Withdraw,WithdrawTime,State,IsDeleted,DeleterUserId,LastModificationTime,LastModifierUserId,CreationTime,CreatorUserId from t_withdraw ");
 			strSql.Append(" where ID=@ID");
 			MySqlParameter[] parameters = {
 					new MySqlParameter("@ID", MySqlDbType.Int32)
@@ -244,7 +255,11 @@ namespace LingLong.Admin.DAL
 				{
 					model.StoreId=int.Parse(row["StoreId"].ToString());
 				}
-				if(row["OpenId"]!=null)
+			    if (row["BillNo"] != null)
+			    {
+			        model.BillNo = row["BillNo"].ToString();
+			    }
+                if (row["OpenId"]!=null)
 				{
 					model.OpenId=row["OpenId"].ToString();
 				}
@@ -260,7 +275,11 @@ namespace LingLong.Admin.DAL
 				{
 					model.WithdrawTime=DateTime.Parse(row["WithdrawTime"].ToString());
 				}
-				if(row["IsDeleted"]!=null && row["IsDeleted"].ToString()!="")
+			    if (row["State"] != null && row["State"].ToString() != "")
+			    {
+			        model.State = int.Parse(row["State"].ToString());
+			    }
+                if (row["IsDeleted"]!=null && row["IsDeleted"].ToString()!="")
 				{
 					model.IsDeleted=int.Parse(row["IsDeleted"].ToString());
 				}
@@ -294,7 +313,7 @@ namespace LingLong.Admin.DAL
 		public DataSet GetList(string strWhere)
 		{
 			StringBuilder strSql=new StringBuilder();
-			strSql.Append("select ID,StoreId,OpenId,WithdrawName,Withdraw,WithdrawTime,IsDeleted,DeleterUserId,LastModificationTime,LastModifierUserId,CreationTime,CreatorUserId ");
+			strSql.Append("select ID,StoreId,BillNo,OpenId,WithdrawName,Withdraw,WithdrawTime,State,IsDeleted,DeleterUserId,LastModificationTime,LastModifierUserId,CreationTime,CreatorUserId ");
 			strSql.Append(" FROM t_withdraw ");
 			if(strWhere.Trim()!="")
 			{
@@ -303,10 +322,28 @@ namespace LingLong.Admin.DAL
 			return DbHelperMySql.Query(strSql.ToString());
 		}
 
-		/// <summary>
-		/// 获取记录总数
-		/// </summary>
-		public int GetRecordCount(string strWhere)
+	    /// <summary>
+	    /// 获得查询分页数据
+	    /// </summary>
+	    public DataSet GetList(int pageSize, int pageIndex, string strWhere, string filedOrder, out int recordCount)
+	    {
+	        StringBuilder strSql = new StringBuilder();
+	        strSql.Append(@"SELECT
+	*
+FROM
+	t_withdraw ");
+	        if (strWhere.Trim() != "")
+	        {
+	            strSql.Append(" where " + strWhere);
+	        }
+	        recordCount = Convert.ToInt32(DbHelperMySql.GetSingle(PagingHelper.CreateCountingSql(strSql.ToString())));
+	        return DbHelperMySql.Query(PagingHelper.CreatePagingSql(recordCount, pageSize, pageIndex, strSql.ToString(), filedOrder));
+	    }
+
+        /// <summary>
+        /// 获取记录总数
+        /// </summary>
+        public int GetRecordCount(string strWhere)
 		{
 			StringBuilder strSql=new StringBuilder();
 			strSql.Append("select count(1) FROM t_withdraw ");

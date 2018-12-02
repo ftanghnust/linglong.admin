@@ -25,7 +25,7 @@ namespace LingLong.Admin.Web.admin.reward
             {
                 ChkAdminLevel("sys_pay", DTEnums.ActionEnum.View.ToString()); //检查权限
                 Model.manager model = GetAdminInfo(); //取得当前管理员信息
-                RptBind("role_type>=" + model.role_type + CombSqlTxt(keywords), "CreationTime DESC");
+                RptBind("1=1" + CombSqlTxt(keywords), "CreationTime DESC");
             }
         }
 
@@ -34,8 +34,9 @@ namespace LingLong.Admin.Web.admin.reward
         {
             this.page = DTRequest.GetQueryInt("page", 1);
             txtKeywords.Text = this.keywords;
-            BLL.t_reward bll = new BLL.t_reward();
-            this.rptList.DataSource = bll.GetList("");
+
+            BLL.t_withdraw bll = new BLL.t_withdraw();
+            this.rptList.DataSource = bll.GetList(this.pageSize, this.page, _strWhere, _orderby, out this.totalCount);
             this.rptList.DataBind();
 
             //绑定页码

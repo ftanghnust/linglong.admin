@@ -122,10 +122,19 @@ namespace LingLong.Admin.BLL
 		{
 			return dal.GetList(strWhere);
 		}
-		/// <summary>
-		/// 获得数据列表
-		/// </summary>
-		public List<LingLong.Admin.Model.t_reward> GetModelList(string strWhere)
+
+	    /// <summary>
+	    /// 获得查询分页数据
+	    /// </summary>
+	    public DataSet GetList(int pageSize, int pageIndex, string strWhere, string filedOrder, out int recordCount)
+	    {
+	        return dal.GetList(pageSize, pageIndex, strWhere, filedOrder, out recordCount);
+	    }
+
+        /// <summary>
+        /// 获得数据列表
+        /// </summary>
+        public List<LingLong.Admin.Model.t_reward> GetModelList(string strWhere)
 		{
 			DataSet ds = dal.GetList(strWhere);
 			return DataTableToList(ds.Tables[0]);
