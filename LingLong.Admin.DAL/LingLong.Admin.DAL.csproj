@@ -82,6 +82,7 @@
     <Compile Include="t_reward_goods.cs" />
     <Compile Include="t_reward_plan.cs" />
     <Compile Include="t_service_evaluation.cs" />
+    <Compile Include="t_templatemessage.cs" />
     <Compile Include="t_store.cs" />
     <Compile Include="t_store_business.cs" />
     <Compile Include="t_store_comment.cs" />

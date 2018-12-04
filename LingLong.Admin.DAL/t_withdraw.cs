@@ -329,9 +329,24 @@ namespace LingLong.Admin.DAL
 	    {
 	        StringBuilder strSql = new StringBuilder();
 	        strSql.Append(@"SELECT
-	*
+	a.*, b.StoreName,
+	CASE c.TrueName
+WHEN NULL THEN
+	c.Nickname
+ELSE
+	c.TrueName
+END AS BusinessName,
+ CASE d.TrueName
+WHEN NULL THEN
+	d.Nickname
+ELSE
+	d.TrueName
+END AS AgentName
 FROM
-	t_withdraw ");
+	t_withdraw a
+LEFT JOIN t_store b ON a.StoreId = b.ID
+LEFT JOIN t_business c ON a.OpenId = c.OpenId
+LEFT JOIN t_agent d ON a.OpenId = d.OpenId ");
 	        if (strWhere.Trim() != "")
 	        {
 	            strSql.Append(" where " + strWhere);

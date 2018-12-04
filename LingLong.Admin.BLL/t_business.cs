@@ -123,6 +123,12 @@ namespace LingLong.Admin.BLL
 			return dal.GetList(strWhere);
 		}
 
+        public DataSet GetListOther(string strWhere)
+        {
+            return dal.GetListOther(strWhere);
+        }
+
+
         /// <summary>
         /// 获得查询分页数据
         /// </summary>

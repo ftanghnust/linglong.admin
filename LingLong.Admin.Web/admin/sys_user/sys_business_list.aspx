@@ -92,6 +92,7 @@
                             <%--<th width="5%" align="center">ID</th>--%>
                             <%--<th width="5%">是否管理员</th>--%>
                             <th width="5%" align="center">真实姓名</th>
+                            <th width="5%" align="center">OpenId</th>
                             <th width="5%" align="center">门店名</th>
                             <th width="5%" align="center">昵称</th>
                             <th width="5%" align="center">角色</th>
@@ -115,6 +116,7 @@
                         <%--<td align="center"><%# Eval("ID") %></td>--%>
                         <%--<td align="center"><%# Eval("IsManage").ToString() == "0"?"否":"是" %></td>--%>
                         <td align="center"><a href="sys_business_edit.aspx?action=<%#DTEnums.ActionEnum.Edit %>&id=<%#Eval("ID")%>"><%# Eval("TrueName") %></a></td>
+                              <td align="center"><%# Eval("OpenId") %></td>
                         <%--<td align="center"><%# Eval("Wechat") %></td>--%>
                         <td align="center"><%# Eval("StoreName") %></td>
                         <td align="center"><%# Eval("Nickname") %></td>

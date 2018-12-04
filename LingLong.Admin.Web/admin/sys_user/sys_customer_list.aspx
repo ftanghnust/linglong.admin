@@ -75,6 +75,7 @@
                             <%--  <th align="center" width="8%">真实姓名</th>
                             <th align="center" width="5%">微信号</th>--%>
                             <th align="center" width="5%">昵称</th>
+                            <th width="5%" align="center">OpenId</th>
                             <th align="center" width="5%">性别</th>
                             <th align="center" width="8%">头像</th>
                             <th align="center" width="8%">手机号码</th>
@@ -98,6 +99,7 @@
                         <%--  <td align="center"><a href="sys_customer_edit.aspx?action=<%#DTEnums.ActionEnum.Edit %>&id=<%#Eval("ID")%>"><%# Eval("TrueName") %></a></td>
                         <td align="center"><%# Eval("Wechat") %></td>--%>
                         <td align="center"><%# Eval("Nickname") %></td>
+                        <td align="center"><%# Eval("OpenId") %></td>
                         <td align="center"><%# Eval("Gender").ToString() == "1"?"男":"女" %></td>
                         <td align="center">
                             <image src="<%# Eval("AvatarUrl") %>" style="width: 100px; height: 80px;"></image>

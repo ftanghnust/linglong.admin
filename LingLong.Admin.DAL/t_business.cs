@@ -394,6 +394,25 @@ namespace LingLong.Admin.DAL
 			return DbHelperMySql.Query(strSql.ToString());
 		}
 
+        public DataSet GetListOther(string strWhere)
+        {
+            StringBuilder strSql = new StringBuilder();
+ 
+            strSql.Append(@" SELECT
+
+    a.BusinessId, b.OpenId, a.StoreId
+FROM
+    t_store_business a
+left JOIN t_business b
+on a.BusinessId = b.ID
+where a.State = 0 and a.RoleId = 3 and b.IsDeleted = 0 ");
+            if (strWhere.Trim() != "")
+            {
+                strSql.Append(" where " + strWhere);
+            }
+            return DbHelperMySql.Query(strSql.ToString());
+        }
+
 
         /// <summary>
         /// 获得查询分页数据

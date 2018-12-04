@@ -1,4 +1,5 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="reward_list.aspx.cs" Inherits="LingLong.Admin.Web.admin.reward.reward_list" %>
+
 <%@ Import Namespace="LingLong.Admin.Common" %>
 
 <!DOCTYPE html>
@@ -43,7 +44,7 @@
                         </ul>
                     </div>
                     <div class="r-list">
-                        <asp:TextBox ID="txtKeywords" runat="server" CssClass="keyword" />
+
                         <table>
                             <tr>
                                 <td><span>提现人</span></td>
@@ -51,7 +52,7 @@
                                     <asp:TextBox ID="txtWithdrawName" runat="server" CssClass="keyword" /></td>
                                 <td><span>提现时间</span></td>
                                 <td>
-                                    <asp:TextBox ID="txtWithdrawTime" runat="server"  class="input rule-date-input" onfocus="WdatePicker({dateFmt:&#39;yyyy-MM-dd HH:mm:ss&#39;})" datatype="/^\s*$|^\d{4}\-\d{1,2}\-\d{1,2}\s{1}(\d{1,2}:){2}\d{1,2}$/" errormsg="请选择正确的日期" sucmsg=" " />
+                                    <asp:TextBox ID="txtWithdrawTime" runat="server" class="input rule-date-input" onfocus="WdatePicker({dateFmt:&#39;yyyy-MM-dd HH:mm:ss&#39;})" datatype="/^\s*$|^\d{4}\-\d{1,2}\-\d{1,2}\s{1}(\d{1,2}:){2}\d{1,2}$/" errormsg="请选择正确的日期" sucmsg=" " />
                                 </td>
                                 <td><span>提现状态</span></td>
                                 <td>
@@ -78,20 +79,22 @@
                 <HeaderTemplate>
                     <table width="100%" border="0" cellspacing="0" cellpadding="0" class="ltable">
                         <tr>
-                            <th align="center" width="4%">提现人Id</th>
+                            <th align="center" width="4%">提现人门店</th>
+                            <th align="center" width="4%">提现人</th>
                             <th align="center" width="4%">提现订单号</th>
-                            <th align="center" width="8%">提现金额</th>
+                            <th align="center" width="4%">提现金额</th>
                             <th align="center" width="4%">提现时间</th>
                             <th align="center" width="5%">提现状态</th>
                         </tr>
                 </HeaderTemplate>
                 <ItemTemplate>
                     <tr>
-                        <td align="center"><%#Eval("BillNo") %></td>
+                        <td align="center"><%#Eval("StoreName") %></td>
+                        <td align="center"><%# string.IsNullOrEmpty(Eval("StoreName").ToString())? Eval("AgentName"):Eval("BusinessName") %></td>
                         <td align="center"><%#Eval("BillNo")%></td>
                         <td align="center"><%#Eval("Withdraw")%></td>
                         <td align="center"><%#Eval("WithdrawTime")%></td>
-                        <td align="center"><%#(Eval("State").ToString().Trim() == "0" || Eval("State").ToString().Trim() == "") ? "失败" : "正常"%></td>         
+                        <td align="center"><%#(Eval("State").ToString().Trim() == "0" || Eval("State").ToString().Trim() == "") ? "失败" : "正常"%></td>
                     </tr>
                 </ItemTemplate>
                 <FooterTemplate>

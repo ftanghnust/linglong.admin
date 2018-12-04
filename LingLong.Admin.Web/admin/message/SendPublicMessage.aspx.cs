@@ -16,56 +16,68 @@ namespace LingLong.Admin.Web.admin.message
         protected void Page_Load(object sender, EventArgs e)
         {
             //获取公众号getAccessToken
-            if (!Page.IsPostBack) {
-                string result = HttpHelper.Send("https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid="
-                + ConfigHelper.GetConfigAppSettings("appid") + "&secret=" + ConfigHelper.GetConfigAppSettings("secret"), "get", "", null);
-                HTTPModel.getAccessToken token = new HTTPModel.getAccessToken();
-                token = (HTTPModel.getAccessToken)JosnHelper.JsonToObject(result, token);
-                access_token = token.access_token;
-            }                
+            if (!Page.IsPostBack)
+            {
+                //string result = HttpHelper.Send("https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid="
+                //+ ConfigHelper.GetConfigAppSettings("appid") + "&secret=" + ConfigHelper.GetConfigAppSettings("secret"), "get", "", null);
+                //HTTPModel.getAccessToken token = new HTTPModel.getAccessToken();
+                //token = (HTTPModel.getAccessToken)JosnHelper.JsonToObject(result, token);
+                //access_token = token.access_token;
+            }
         }
 
         protected void submit_Click(object sender, EventArgs e)
         {
-            //if (txt_template_id.Text.Trim() == "")
-            //{
-            //    JscriptMsg("无效的接收人，请填写接收人！", "SendPublicMessage.aspx?#");
-            //}
-            //var data = new SendMessageToUser
-            //{
-            //    touser = txt_template_id.Text,
-            //    msgtype = "text",
-            //    text = new MessageText
-            //    {
-            //        content = txt_MessageText.InnerText
-            //    }
-            //    //weapp_template_msg = new weapp_template_msg() {
-            //    //    template_id = txt_template_id.Text,
-            //    //    page = txt_page.Text,
-            //    //    form_id = txt_form_id.Text,
-            //    //    data = txt_data.Text,
-            //    //    emphasis_keyword = txt_emphasis_keyword.Text,
-            //    //},
-            //    //mp_template_msg = new mp_template_msg() {
-            //    //    appid = ConfigHelper.GetConfigAppSettings("appid"),
-            //    //    template_id = txt_template_id.Text,
-            //    //    url = txt_url.Text,
-            //    //    miniprogram = txt_miniprogram.Text,
-            //    //    data = txt_data.Text,
-            //    //}
-            //};
+            if (txtMessage.Text.Trim() == "")
+            {
+                JscriptMsg("消息内容不能为空！", "SendPublicMessage.aspx?#");
+            }
 
-            //string result = HttpHelper.Send("https://api.weixin.qq.com/cgi-bin/message/custom/send?access_token=" + access_token, "post", JosnHelper.ObjectToJson(data), null);
-            //HTTPModel.result_template_msg msg = new HTTPModel.result_template_msg();
-            //msg = (HTTPModel.result_template_msg)JosnHelper.JsonToObject(result, msg);
-            //if (msg.errcode != 0)
-            //{
-            //    JscriptMsg("发送成功！", "SendPublicMessage.aspx?#");
-            //}
-            //else
-            //{
-            //    JscriptMsg("发送失败！", "SendPublicMessage.aspx?#");
-            //}
+            if (rbt_type1.Checked && txtOpenId.Text.Trim() == "")
+            {
+                JscriptMsg("无效的接收人，请填写接收人！", "SendPublicMessage.aspx?#");
+            }
+
+            if (!DoAdd())
+            {
+                JscriptMsg("保存过程中发生错误！", "");
+                return;
+            }
+            JscriptMsg("添加信息成功！", "SendPublicMessage.aspx");
+        }
+
+        private bool DoAdd()
+        {
+            Model.t_templatemessage model = new Model.t_templatemessage();
+            BLL.t_templatemessage bll = new BLL.t_templatemessage();
+
+            var type = 0;
+            if (rbt_type1.Checked)
+            {
+                type = 1;
+            }
+            if (rbt_type2.Checked)
+            {
+                if (drp_SelectPe.SelectedItem.Text == "客户")
+                {
+                    type = 2;
+                }
+                else
+                {
+                    type = 3;
+                }
+            }
+            model.Type = type;
+            model.OpenId = txtOpenId.Text;
+            model.Message = txtMessage.Text;
+            model.IsDeleted = 0;
+            model.CreationTime = DateTime.Now;
+
+            if (bll.Add(model))
+            {
+                return true;
+            }
+            return false;
         }
 
         public class MessageText
@@ -80,6 +92,24 @@ namespace LingLong.Admin.Web.admin.message
             public string msgtype { set; get; }
 
             public MessageText text { set; get; }
+        }
+
+        protected void rbt_type1_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rbt_type1.Checked)
+            {
+                dl_df.Visible = true;
+                dl_qf.Visible = false;
+            }
+        }
+
+        protected void rbt_type2_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rbt_type2.Checked)
+            {
+                dl_df.Visible = false;
+                dl_qf.Visible = true;
+            }
         }
     }
 }
