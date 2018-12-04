@@ -14,3 +14,9 @@
 /LingLong.Admin.DAL/bin/Debug
 /LingLong.Admin.Model/bin/Debug
 /LingLong.Admin.Web/bin
+/.vs
+/LingLong.Admin.BLL/obj/Release
+/LingLong.Admin.Common/obj/Release
+/LingLong.Admin.DAL/obj/Release
+/LingLong.Admin.Model/obj/Release
+/LingLong.Admin.Web/obj/Release
