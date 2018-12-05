@@ -59,20 +59,49 @@ namespace LingLong.Admin.BLL
             BLL.t_message meaagebll = new BLL.t_message();
             if (model.Type == 1)
             {
-                meaagebll.Add(new Model.t_message
+                //服务人员 需要门店信息
+                BLL.t_business businessbll = new BLL.t_business();
+                var result = businessbll.GetListOther(string.Format(" b.OpenId='{0}' ", model.OpenId));
+                if (result.Tables[0].Rows.Count == 0)
                 {
-                    StoreId = 1,
-                    SendOpenId = "System",
-                    SendUserId = 1,
-                    AcceptOpenId = model.OpenId,
-                    AcceptUserId = 1,
-                    Content = model.Message,
-                    MessageType = 0,
-                    SendTime = DateTime.Now,
-                    State = 0,
-                    IsDeleted = 0,
-                    CreationTime = DateTime.Now
-                });
+                    meaagebll.Add(new Model.t_message
+                    {
+                        StoreId = 1,
+                        SendOpenId = "System",
+                        SendUserId = 1,
+                        AcceptOpenId = model.OpenId,
+                        AcceptUserId = 1,
+                        Content = model.Message,
+                        MessageType = 0,
+                        SendTime = DateTime.Now,
+                        State = 0,
+                        IsDeleted = 0,
+                        CreationTime = DateTime.Now
+                    });
+                }
+                else
+                {
+                    for (int i = 0; i < result.Tables[0].Rows.Count; i++)
+                    {
+                        var openid = result.Tables[0].Rows[i]["OpenId"].ToString();
+                        var storeid = result.Tables[0].Rows[i]["StoreId"].ToString();
+                        var id = result.Tables[0].Rows[i]["BusinessId"].ToString();
+                        meaagebll.Add(new Model.t_message
+                        {
+                            StoreId = int.Parse(storeid),
+                            SendOpenId = "System",
+                            SendUserId = 1,
+                            AcceptOpenId = openid,
+                            AcceptUserId = int.Parse(id),
+                            Content = model.Message,
+                            MessageType = 0,
+                            SendTime = DateTime.Now,
+                            State = 0,
+                            IsDeleted = 0,
+                            CreationTime = DateTime.Now
+                        });
+                    }
+                }
             }
             if (model.Type == 2)
             {
@@ -107,11 +136,11 @@ namespace LingLong.Admin.BLL
                 for (int i = 0; i < result.Tables[0].Rows.Count; i++)
                 {
                     var openid = result.Tables[0].Rows[i]["OpenId"].ToString();
-                    var storeid = result.Tables[0].Rows[i]["StoreId"].ToString(); 
+                    var storeid = result.Tables[0].Rows[i]["StoreId"].ToString();
                     var id = result.Tables[0].Rows[i]["BusinessId"].ToString();
                     meaagebll.Add(new Model.t_message
                     {
-                        StoreId =int.Parse(storeid),
+                        StoreId = int.Parse(storeid),
                         SendOpenId = "System",
                         SendUserId = 1,
                         AcceptOpenId = openid,
